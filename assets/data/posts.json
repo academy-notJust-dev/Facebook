@@ -1,0 +1,105 @@
+[
+  {
+    "id": "p1",
+    "createdAt": "4 m",
+    "User": {
+      "id": "u1",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
+      "name": "Vadim Savin"
+    },
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg",
+    "numberOfLikes": 11,
+    "numberOfShares": 2
+  },
+  {
+    "id": "p2",
+    "createdAt": "10 m",
+    "User": {
+      "id": "u2",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+      "name": "Elon Musk"
+    },
+    "description": "Today we launched another rocket 🚀",
+    "numberOfLikes": 312,
+    "numberOfShares": 54
+  },
+  {
+    "id": "p3",
+    "createdAt": "10 m",
+    "User": {
+      "id": "u3",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/jeff.jpeg",
+      "name": "Jeff"
+    },
+    "description": "View from my office 😍",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/5.jpeg",
+    "numberOfLikes": 234,
+    "numberOfShares": 43
+  },
+  {
+    "id": "p4",
+    "createdAt": "10 m",
+    "User": {
+      "id": "u4",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/zuck.jpeg",
+      "name": "Zuck"
+    },
+    "description": "Surfing in Metaverse",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/8.jpg",
+    "numberOfLikes": 65,
+    "numberOfShares": 4
+  },
+  {
+    "id": "p5",
+    "createdAt": "1 d",
+    "User": {
+      "id": "u1",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG",
+      "name": "Vadim Savin"
+    },
+    "description": "Merch for the Real notJust Developers",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/0.jpeg",
+    "numberOfLikes": 54,
+    "numberOfShares": 8
+  },
+  {
+    "id": "p6",
+    "createdAt": "1 d",
+    "User": {
+      "id": "u1",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG",
+      "name": "Vadim Savin"
+    },
+    "description": "Lovely",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/vertical-images/4.jpeg",
+    "numberOfLikes": 54,
+    "numberOfShares": 8
+  },
+  {
+    "id": "p7",
+    "createdAt": "2 d",
+    "User": {
+      "id": "u4",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/zuck.jpeg",
+      "name": "Zuck"
+    },
+    "description": "Sweet",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/vertical-images/3.jpg",
+    "numberOfLikes": 54,
+    "numberOfShares": 8
+  },
+  {
+    "id": "p8",
+    "createdAt": "1 d",
+    "User": {
+      "id": "u1",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG",
+      "name": "Vadim Savin"
+    },
+    "description": "Can't wait for the winter",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/9.jpg",
+    "numberOfLikes": 34,
+    "numberOfShares": 2
+  }
+]
