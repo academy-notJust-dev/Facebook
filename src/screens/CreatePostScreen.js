@@ -36,8 +36,6 @@ const CreatePostScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Create Post Screen</Text>
-
       <View style={styles.header}>
         <Image source={{ uri: user.image }} style={styles.profileImage} />
         <Text style={styles.name}>{user.name}</Text>
@@ -72,7 +70,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "100%",
     padding: 10,
-    paddingTop: 30,
   },
   header: {
     padding: 10,
