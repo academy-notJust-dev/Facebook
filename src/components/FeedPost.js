@@ -7,6 +7,7 @@ import {
 } from "@expo/vector-icons";
 import LikeImage from "../../assets/images/like.png";
 import { useState } from "react";
+import { S3Image } from "aws-amplify-react-native";
 
 /* Post component */
 export default function FeedPost({ post }) {
@@ -32,11 +33,7 @@ export default function FeedPost({ post }) {
       {/* Post body with description and image */}
       <Text style={styles.description}>{post.description}</Text>
       {post.image && (
-        <Image
-          source={{ uri: post.image }}
-          style={styles.image}
-          resizeMode="cover"
-        />
+        <S3Image imgKey={post.image} style={styles.image} resizeMode="cover" />
       )}
 
       {/* Post footer with likes and button */}

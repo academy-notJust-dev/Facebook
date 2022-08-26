@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3prepstoragee2fb57f8",
+  "bucketName": "prep-storage-e2fb57f8",
+  "policyUUID": "a134b28f",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

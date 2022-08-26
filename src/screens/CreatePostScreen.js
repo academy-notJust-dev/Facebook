@@ -14,6 +14,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DataStore } from "@aws-amplify/datastore";
 import { Post } from "../models";
 import { useNavigation } from "@react-navigation/native";
+import { v4 as uuidv4 } from "uuid";
+import { Storage } from "aws-amplify";
 
 const user = {
   id: "u1",
@@ -30,10 +32,16 @@ const CreatePostScreen = () => {
   const navigation = useNavigation();
 
   const onPost = async () => {
+    let imageKey;
+    if (image) {
+      imageKey = await uploadFile(image);
+    }
+    console.warn(imageKey);
+
     await DataStore.save(
       new Post({
         description: description,
-        // "imag": "Lorem ipsum dolor sit amet",
+        imag: imageKey,
         numberOfLikes: 1020,
         numberOfShares: 1020,
         // "User": /* Provide a User instance here */
@@ -45,6 +53,21 @@ const CreatePostScreen = () => {
 
     navigation.goBack();
   };
+
+  async function uploadFile(fileUri) {
+    console.log("uploading");
+    try {
+      const response = await fetch(fileUri);
+      const blob = await response.blob();
+      const key = `${uuidv4()}.png`;
+      await Storage.put(key, blob, {
+        contentType: "image/png", // contentType is optional
+      });
+      return key;
+    } catch (err) {
+      console.log("Error uploading file:", err);
+    }
+  }
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({

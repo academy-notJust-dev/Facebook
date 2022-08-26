@@ -1,7 +1,7 @@
 type Post @model @auth(rules: [{allow: public}]) {
   id: ID!
   description: String
-  imag: String
+  image: String
   numberOfLikes: Int
   numberOfShares: Int
   User: User @hasOne
@@ -12,3 +12,4 @@ type User @model @auth(rules: [{allow: public}]) {
   name: String!
   image: String
 }
+ 
