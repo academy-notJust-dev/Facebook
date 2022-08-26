@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-socialmediaprep-staging-181842-authRole",
+      "UnauthRoleArn": "arn:aws:iam::704219588443:role/amplify-socialmediaprep-staging-181842-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::704219588443:role/amplify-socialmediaprep-staging-181842-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-socialmediaprep-staging-181842-deployment",
+      "UnauthRoleName": "amplify-socialmediaprep-staging-181842-unauthRole",
+      "StackName": "amplify-socialmediaprep-staging-181842",
+      "StackId": "arn:aws:cloudformation:eu-west-1:704219588443:stack/amplify-socialmediaprep-staging-181842/83fbd080-256b-11ed-aa51-06551b30a483",
+      "AmplifyAppId": "dknc57bozse5x"
+    }
+  }
+}
