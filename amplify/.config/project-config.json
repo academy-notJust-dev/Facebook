@@ -1,0 +1,17 @@
+{
+    "projectName": "SocialMediaPrep",
+    "version": "2.0",
+    "frontend": "javascript",
+    "providers": [
+        "awscloudformation"
+    ],
+    "javascript": {
+        "framework": "react-native",
+        "config": {
+            "SourceDir": "src",
+            "DistributionDir": "/",
+            "BuildCommand": "npm.cmd run-script build",
+            "StartCommand": "npm.cmd run-script start"
+        }
+    }
+}

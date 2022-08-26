@@ -16,9 +16,9 @@ export default function FeedPost({ post }) {
     <View style={styles.post}>
       {/* Post Header with details about the author */}
       <View style={styles.header}>
-        <Image source={{ uri: post.User.image }} style={styles.profileImage} />
+        <Image source={{ uri: post.User?.image }} style={styles.profileImage} />
         <View>
-          <Text style={styles.name}>{post.User.name}</Text>
+          <Text style={styles.name}>{post.User?.name}</Text>
           <Text style={styles.subtitle}>{post.createdAt}</Text>
         </View>
         <Entypo

@@ -4,11 +4,20 @@ import posts from "../../assets/data/posts.json";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+import { DataStore } from "@aws-amplify/datastore";
+import { Post } from "../models";
+import { useEffect, useState } from "react";
+
 const img =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/user.png";
 
 const FeedScreen = () => {
   const navigation = useNavigation();
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    DataStore.query(Post).then(setPosts);
+  }, []);
 
   const createPost = () => {
     navigation.navigate("Create Post");

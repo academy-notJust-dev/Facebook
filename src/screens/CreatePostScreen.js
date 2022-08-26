@@ -11,6 +11,9 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { DataStore } from "@aws-amplify/datastore";
+import { Post } from "../models";
+import { useNavigation } from "@react-navigation/native";
 
 const user = {
   id: "u1",
@@ -24,10 +27,23 @@ const CreatePostScreen = () => {
   const [image, setImage] = useState(null);
   const insets = useSafeAreaInsets();
 
-  const onPost = () => {
-    console.warn("Posting: ", description);
+  const navigation = useNavigation();
+
+  const onPost = async () => {
+    await DataStore.save(
+      new Post({
+        description: description,
+        // "imag": "Lorem ipsum dolor sit amet",
+        numberOfLikes: 1020,
+        numberOfShares: 1020,
+        // "User": /* Provide a User instance here */
+      })
+    );
+
     setDescription("");
     setImage("");
+
+    navigation.goBack();
   };
 
   const pickImage = async () => {
@@ -71,7 +87,7 @@ const CreatePostScreen = () => {
         style={styles.input}
         multiline
       />
-      <Image source={{ uri: image }} style={styles.image} />
+      {image && <Image source={{ uri: image }} style={styles.image} />}
 
       <View style={styles.buttonContainer}>
         <Button onPress={onPost} title="Post" disabled={!description} />
