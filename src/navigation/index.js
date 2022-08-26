@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Feed">
+      <Stack.Navigator>
         <Stack.Screen name="Feed" component={FeedScreen} />
         <Stack.Screen name="Create Post" component={CreatePostScreen} />
       </Stack.Navigator>

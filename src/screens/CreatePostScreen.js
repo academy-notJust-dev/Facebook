@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Image, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Image,
+  Button,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const user = {
   id: "u1",
@@ -13,10 +22,12 @@ const user = {
 const CreatePostScreen = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const insets = useSafeAreaInsets();
 
   const onPost = () => {
     console.warn("Posting: ", description);
     setDescription("");
+    setImage("");
   };
 
   const pickImage = async () => {
@@ -35,7 +46,12 @@ const CreatePostScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[styles.container, { marginBottom: insets.bottom }]}
+      contentContainerStyle={{ flex: 1 }}
+      keyboardVerticalOffset={150}
+    >
       <View style={styles.header}>
         <Image source={{ uri: user.image }} style={styles.profileImage} />
         <Text style={styles.name}>{user.name}</Text>
@@ -60,7 +76,7 @@ const CreatePostScreen = () => {
       <View style={styles.buttonContainer}>
         <Button onPress={onPost} title="Post" disabled={!description} />
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -89,6 +105,7 @@ const styles = StyleSheet.create({
   input: {},
   buttonContainer: {
     marginTop: "auto",
+    marginVertical: 10,
   },
   icon: {
     marginLeft: "auto",
