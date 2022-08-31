@@ -16,6 +16,7 @@ import { Post } from "../models";
 import { useNavigation } from "@react-navigation/native";
 import { v4 as uuidv4 } from "uuid";
 import { Storage } from "aws-amplify";
+import { useUserContext } from "../contexts/UserContext";
 
 const user = {
   id: "u1",
@@ -28,25 +29,25 @@ const CreatePostScreen = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const insets = useSafeAreaInsets();
+  const { user } = useUserContext();
 
   const navigation = useNavigation();
 
   const onPost = async () => {
-    let imageKey;
-    if (image) {
-      imageKey = await uploadFile(image);
-    }
-    console.warn(imageKey);
+    const newPost = new Post({
+      description: description,
+      numberOfLikes: 1020,
+      numberOfShares: 1020,
+      userID: user.id,
+    });
 
-    await DataStore.save(
-      new Post({
-        description: description,
-        imag: imageKey,
-        numberOfLikes: 1020,
-        numberOfShares: 1020,
-        // "User": /* Provide a User instance here */
-      })
-    );
+    if (image) {
+      newPost.image = await uploadFile(image);
+    }
+
+    const saved = await DataStore.save(newPost);
+    console.log("saved");
+    console.log(saved);
 
     setDescription("");
     setImage("");
@@ -54,8 +55,7 @@ const CreatePostScreen = () => {
     navigation.goBack();
   };
 
-  async function uploadFile(fileUri) {
-    console.log("uploading");
+  const uploadFile = async (fileUri) => {
     try {
       const response = await fetch(fileUri);
       const blob = await response.blob();
@@ -67,7 +67,7 @@ const CreatePostScreen = () => {
     } catch (err) {
       console.log("Error uploading file:", err);
     }
-  }
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({

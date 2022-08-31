@@ -1,6 +1,5 @@
 import { FlatList, StyleSheet, Image, Text, Pressable } from "react-native";
 import FeedPost from "../components/FeedPost";
-import posts from "../../assets/data/posts.json";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -22,6 +21,8 @@ const FeedScreen = () => {
   const createPost = () => {
     navigation.navigate("Create Post");
   };
+
+  console.log("posts", posts);
 
   return (
     <FlatList

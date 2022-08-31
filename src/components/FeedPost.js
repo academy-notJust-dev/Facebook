@@ -8,16 +8,21 @@ import {
 import LikeImage from "../../assets/images/like.png";
 import { useState } from "react";
 import { S3Image } from "aws-amplify-react-native";
+import { useNavigation } from "@react-navigation/native";
 
 /* Post component */
 export default function FeedPost({ post }) {
   const [isLiked, setIsLiked] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <View style={styles.post}>
       {/* Post Header with details about the author */}
-      <View style={styles.header}>
-        <Image source={{ uri: post.User?.image }} style={styles.profileImage} />
+      <Pressable
+        onPress={() => navigation.navigate("Profile", { id: post.User?.id })}
+        style={styles.header}
+      >
+        <S3Image imgKey={post.User?.image} style={styles.profileImage} />
         <View>
           <Text style={styles.name}>{post.User?.name}</Text>
           <Text style={styles.subtitle}>{post.createdAt}</Text>
@@ -28,7 +33,7 @@ export default function FeedPost({ post }) {
           color="gray"
           style={styles.icon}
         />
-      </View>
+      </Pressable>
 
       {/* Post body with description and image */}
       <Text style={styles.description}>{post.description}</Text>
