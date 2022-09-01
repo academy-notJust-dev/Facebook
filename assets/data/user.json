@@ -1,0 +1,46 @@
+{
+  "id": "u1",
+  "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
+  "name": "Vadim Savin",
+  "posts": [
+    {
+      "id": "p1",
+      "createdAt": "4 m",
+      "User": {
+        "id": "u1",
+        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
+        "name": "Vadim Savin"
+      },
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg",
+      "numberOfLikes": 11,
+      "numberOfShares": 2
+    },
+    {
+      "id": "p5",
+      "createdAt": "1 d",
+      "User": {
+        "id": "u1",
+        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG",
+        "name": "Vadim Savin"
+      },
+      "description": "Merch for the Real notJust Developers",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/pinterest/0.jpeg",
+      "numberOfLikes": 54,
+      "numberOfShares": 8
+    },
+    {
+      "id": "p6",
+      "createdAt": "1 d",
+      "User": {
+        "id": "u1",
+        "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim1.JPG",
+        "name": "Vadim Savin"
+      },
+      "description": "Lovely",
+      "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/vertical-images/4.jpeg",
+      "numberOfLikes": 54,
+      "numberOfShares": 8
+    }
+  ]
+}
