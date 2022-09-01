@@ -13,7 +13,6 @@ const Stack = createNativeStackNavigator();
 
 const Navigator = () => {
   const { user, loading } = useUserContext();
-  console.log(user);
 
   if (loading) {
     return <ActivityIndicator />;

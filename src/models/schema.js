@@ -38,12 +38,19 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "userID": {
-                    "name": "userID",
+                "User": {
+                    "name": "User",
                     "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "postUserId"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -60,6 +67,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
+                },
+                "postUserId": {
+                    "name": "postUserId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 }
             },
             "syncable": true,
@@ -68,15 +82,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUser",
-                        "fields": [
-                            "userID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -119,20 +124,6 @@ export const schema = {
                     "type": "String",
                     "isRequired": false,
                     "attributes": []
-                },
-                "Posts": {
-                    "name": "Posts",
-                    "isArray": true,
-                    "type": {
-                        "model": "Post"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "userID"
-                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -179,5 +170,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "396a83c1e0e9ce7bd3fd5b7103b9a193"
+    "version": "dd413b00361b6574b8a7646358ecad7c"
 };

@@ -4,14 +4,11 @@ type Post @model @auth(rules: [{ allow: public }]) {
   image: String
   numberOfLikes: Int
   numberOfShares: Int
-  userID: ID! @index(name: "byUser")
-
-  User: User @belongsTo(fields: ["userID"])
+  User: User @hasOne
 }
 
 type User @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   image: String
-  Posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
 }

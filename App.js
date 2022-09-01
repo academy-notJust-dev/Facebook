@@ -2,10 +2,9 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import Navigator from "./src/navigation";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Amplify, Auth, DataStore } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import awsconfig from "./src/aws-exports";
 import { withAuthenticator } from "aws-amplify-react-native";
-import { useEffect, useState } from "react";
 import UserContextProvider from "./src/contexts/UserContext";
 
 Amplify.configure({ ...awsconfig, Analytics: { disabled: true } });

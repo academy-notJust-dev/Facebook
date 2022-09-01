@@ -75,19 +75,14 @@ const UpdateProfileScreen = () => {
   };
 
   const onCreate = async () => {
-    let imageKey;
-    if (image) {
-      imageKey = await uploadFile(image);
-    }
-
     const newUser = {
       id: sub,
       name,
     };
-    if (imageKey) {
-      newUser.image = imageKey;
+
+    if (image) {
+      newUser.image = await uploadFile(image);
     }
-    console.log(newUser);
 
     await API.graphql(graphqlOperation(createUser, { input: newUser }));
   };

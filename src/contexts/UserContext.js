@@ -17,7 +17,6 @@ const UserContextProvider = ({ children }) => {
   const fetchUser = async () => {
     setLoading(true);
     const authUser = await Auth.currentAuthenticatedUser({ bypassCache: true });
-    console.log("sub", authUser.attributes.sub);
     const dbUser = await DataStore.query(User, authUser.attributes.sub);
     setSub(authUser.attributes.sub);
     setUser(dbUser);
@@ -27,8 +26,6 @@ const UserContextProvider = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
-
-  console.log(user);
 
   return (
     <UserContext.Provider

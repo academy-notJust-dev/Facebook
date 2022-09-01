@@ -21,9 +21,7 @@ const FeedScreen = () => {
   const createPost = () => {
     navigation.navigate("Create Post");
   };
-
-  console.log("posts", posts);
-
+  console.warn(posts.length);
   return (
     <FlatList
       data={posts}

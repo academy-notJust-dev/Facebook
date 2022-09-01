@@ -34,20 +34,18 @@ const CreatePostScreen = () => {
   const navigation = useNavigation();
 
   const onPost = async () => {
-    const newPost = new Post({
+    const newPost = {
       description: description,
       numberOfLikes: 1020,
       numberOfShares: 1020,
-      userID: user.id,
-    });
+      postUserId: user.id,
+    };
 
     if (image) {
       newPost.image = await uploadFile(image);
     }
 
-    const saved = await DataStore.save(newPost);
-    console.log("saved");
-    console.log(saved);
+    const saved = await DataStore.save(new Post(newPost));
 
     setDescription("");
     setImage("");
@@ -76,8 +74,6 @@ const CreatePostScreen = () => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
