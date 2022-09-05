@@ -4,7 +4,7 @@ import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 import { useEffect, useState } from "react";
-import { DataStore } from "@aws-amplify/datastore";
+import { DataStore, SortDirection, Predicates } from "aws-amplify";
 import { Post } from "../models";
 
 const img =
@@ -15,7 +15,11 @@ const FeedScreen = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    DataStore.query(Post).then(setPosts);
+    const subscription = DataStore.observeQuery(Post, Predicates.ALL, {
+      sort: (s) => s.createdAt(SortDirection.DESCENDING),
+    }).subscribe(({ items }) => setPosts(items));
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const createPost = () => {
