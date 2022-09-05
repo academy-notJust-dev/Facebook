@@ -8,12 +8,12 @@ import {
   Dimensions,
   FlatList,
   Pressable,
+  Alert,
 } from "react-native";
 import { Auth, DataStore } from "aws-amplify";
 import { User, Post } from "../models";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { useUserContext } from "../contexts/UserContext";
 import FeedPost from "../components/FeedPost";
 import {
   AntDesign,
@@ -53,31 +53,27 @@ const ProfileScreenHeader = ({ user, isMe = false }) => {
       <Text style={styles.name}>{user.name}</Text>
 
       {isMe && (
-        <>
-          <View style={styles.buttonsContainer}>
-            <Pressable
-              style={[styles.button, { backgroundColor: "royalblue" }]}
-            >
-              <AntDesign name="pluscircle" size={16} color="white" />
-              <Text style={[styles.buttonText, { color: "white" }]}>
-                Add to Story
-              </Text>
-            </Pressable>
-            <Pressable
-              onPress={() => navigation.navigate("Update Profile")}
-              style={styles.button}
-            >
-              <MaterialCommunityIcons name="pencil" size={16} color="black" />
-              <Text style={styles.buttonText}>Edit Profile</Text>
-            </Pressable>
-            <Pressable
-              onPress={signOut}
-              style={[styles.button, { flex: 0, width: 50 }]}
-            >
-              <MaterialIcons name="logout" size={16} color="black" />
-            </Pressable>
-          </View>
-        </>
+        <View style={styles.buttonsContainer}>
+          <Pressable style={[styles.button, { backgroundColor: "royalblue" }]}>
+            <AntDesign name="pluscircle" size={16} color="white" />
+            <Text style={[styles.buttonText, { color: "white" }]}>
+              Add to Story
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => navigation.navigate("Update Profile")}
+            style={styles.button}
+          >
+            <MaterialCommunityIcons name="pencil" size={16} color="black" />
+            <Text style={styles.buttonText}>Edit Profile</Text>
+          </Pressable>
+          <Pressable
+            onPress={signOut}
+            style={[styles.button, { flex: 0, width: 50 }]}
+          >
+            <MaterialIcons name="logout" size={16} color="black" />
+          </Pressable>
+        </View>
       )}
 
       <View style={styles.textLine}>
@@ -110,15 +106,50 @@ const ProfileScreenHeader = ({ user, isMe = false }) => {
 
 const ProfileScreen = () => {
   const [user, setUser] = useState(null);
+  const [isMe, setIsMe] = useState(false);
   const [posts, setPosts] = useState([]);
   const route = useRoute();
-  const { sub } = useUserContext();
+  const navigation = useNavigation();
 
   useEffect(() => {
-    const userId = route?.params?.id || sub;
+    const fetchData = async () => {
+      // get the authenticated user
+      const userData = await Auth.currentAuthenticatedUser();
+      // take the user id from the route or from the authenticated user
+      const userId = route?.params?.id || userData?.attributes?.sub;
+      if (!userId) {
+        return;
+      }
 
-    DataStore.query(User, userId).then(setUser);
-    DataStore.query(Post, (p) => p.postUserId("eq", userId)).then(setPosts);
+      // keep track if we are querying the data about the authenticated user
+      const isMe = userId === userData?.attributes?.sub;
+      setIsMe(isMe);
+
+      // query the database user
+      const dbUser = await DataStore.query(User, userId);
+
+      if (!dbUser) {
+        // if we couldn't find the user in the database
+        if (isMe) {
+          // and it is my profile, then redirect to Update Profile page
+          navigation.navigate("Update Profile");
+        } else {
+          // otherwise, Alert the user
+          Alert.alert("User not found!");
+        }
+        return;
+      }
+      // save the user in the state
+      setUser(dbUser);
+
+      // query his posts
+      const dbPosts = await DataStore.query(Post, (p) =>
+        p.postUserId("eq", userId)
+      );
+      setPosts(dbPosts);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -128,7 +159,7 @@ const ProfileScreen = () => {
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={() => (
         <>
-          <ProfileScreenHeader user={user} isMe={user?.id === sub} />
+          <ProfileScreenHeader user={user} isMe={isMe} />
           <Text style={styles.sectionTitle}>Posts</Text>
         </>
       )}

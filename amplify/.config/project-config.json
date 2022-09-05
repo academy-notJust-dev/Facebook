@@ -2,7 +2,7 @@
   "providers": [
     "awscloudformation"
   ],
-  "projectName": "SocialMediaPrep",
+  "projectName": "FBTest",
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {

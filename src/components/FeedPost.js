@@ -25,10 +25,8 @@ export default function FeedPost({ post }) {
     if (!post.postUserId) {
       return;
     }
-    console.log("querying for userId: ", post.postUserId);
     DataStore.query(User, post.postUserId).then(setUser);
   }, [post.postUserId]);
-  console.log("post ", post);
 
   return (
     <View style={styles.post}>
@@ -38,7 +36,7 @@ export default function FeedPost({ post }) {
         style={styles.header}
       >
         {user?.image ? (
-          <S3Image imgKey={user?.image} style={styles.profileImage} />
+          <S3Image imgKey={user.image} style={styles.profileImage} />
         ) : (
           <Image source={{ uri: dummy_img }} style={styles.profileImage} />
         )}

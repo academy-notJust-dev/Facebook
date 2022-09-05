@@ -3,9 +3,9 @@ import FeedPost from "../components/FeedPost";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
+import { useEffect, useState } from "react";
 import { DataStore } from "@aws-amplify/datastore";
 import { Post } from "../models";
-import { useEffect, useState } from "react";
 
 const img =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/user.png";
@@ -21,7 +21,7 @@ const FeedScreen = () => {
   const createPost = () => {
     navigation.navigate("Create Post");
   };
-  console.warn(posts.length);
+
   return (
     <FlatList
       data={posts}

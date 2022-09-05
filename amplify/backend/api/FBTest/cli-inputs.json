@@ -1,7 +1,7 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "SocialMediaPrep",
+    "apiName": "FBTest",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",

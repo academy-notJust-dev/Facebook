@@ -12,10 +12,10 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as ImagePicker from "expo-image-picker";
 import { v4 as uuidv4 } from "uuid";
-import { API, graphqlOperation, Auth, Storage, DataStore } from "aws-amplify";
 import { User } from "../models";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
-import { useUserContext } from "../contexts/UserContext";
+import { API, graphqlOperation, Auth, DataStore, Storage } from "aws-amplify";
+import { useNavigation } from "@react-navigation/native";
 
 const dummy_img =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/user.png";
@@ -39,13 +39,19 @@ const UpdateProfileScreen = () => {
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const insets = useSafeAreaInsets();
-  const { sub, user, refetchUser } = useUserContext();
+  const [user, setUser] = useState(null);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    if (user) {
-      setName(user.name);
-    }
-  }, [user]);
+    const fetchUser = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
+      const dbUser = await DataStore.query(User, userData.attributes.sub);
+      setUser(dbUser);
+      setName(dbUser.name);
+    };
+
+    fetchUser();
+  }, []);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -75,9 +81,11 @@ const UpdateProfileScreen = () => {
   };
 
   const onCreate = async () => {
+    const userData = await Auth.currentAuthenticatedUser();
     const newUser = {
-      id: sub,
+      id: userData.attributes.sub,
       name,
+      _version: 1,
     };
 
     if (image) {
@@ -94,10 +102,10 @@ const UpdateProfileScreen = () => {
     }
     await DataStore.save(
       User.copyOf(user, (updated) => {
+        updated.name = name;
         if (imageKey) {
           updated.image = imageKey;
         }
-        updated.name = name;
       })
     );
   };
@@ -108,7 +116,7 @@ const UpdateProfileScreen = () => {
     } else {
       await onCreate();
     }
-    refetchUser();
+    navigation.navigate("Feed");
   };
 
   let renderImage = <Image source={{ uri: dummy_img }} style={styles.image} />;

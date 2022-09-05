@@ -1,19 +1,19 @@
 {
   "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-socialmediaprep-staging-181842-authRole",
-      "UnauthRoleArn": "arn:aws:iam::704219588443:role/amplify-socialmediaprep-staging-181842-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::704219588443:role/amplify-socialmediaprep-staging-181842-authRole",
+      "AuthRoleName": "amplify-fbtest-staging-130021-authRole",
+      "UnauthRoleArn": "arn:aws:iam::704219588443:role/amplify-fbtest-staging-130021-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::704219588443:role/amplify-fbtest-staging-130021-authRole",
       "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-socialmediaprep-staging-181842-deployment",
-      "UnauthRoleName": "amplify-socialmediaprep-staging-181842-unauthRole",
-      "StackName": "amplify-socialmediaprep-staging-181842",
-      "StackId": "arn:aws:cloudformation:eu-west-1:704219588443:stack/amplify-socialmediaprep-staging-181842/83fbd080-256b-11ed-aa51-06551b30a483",
-      "AmplifyAppId": "dknc57bozse5x"
+      "DeploymentBucketName": "amplify-fbtest-staging-130021-deployment",
+      "UnauthRoleName": "amplify-fbtest-staging-130021-unauthRole",
+      "StackName": "amplify-fbtest-staging-130021",
+      "StackId": "arn:aws:cloudformation:eu-west-1:704219588443:stack/amplify-fbtest-staging-130021/09a02fe0-29f6-11ed-b13a-02c561d17495",
+      "AmplifyAppId": "d1beyns2fn5qnx"
     },
     "categories": {
       "auth": {
-        "SocialMediaPrep": {}
+        "FBTest": {}
       }
     }
   }

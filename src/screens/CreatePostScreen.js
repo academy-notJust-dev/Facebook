@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -11,27 +11,33 @@ import {
 import { Entypo } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { DataStore } from "@aws-amplify/datastore";
-import { Post } from "../models";
+import { DataStore, Auth, Storage } from "aws-amplify";
+import { Post, User } from "../models";
 import { useNavigation } from "@react-navigation/native";
 import { v4 as uuidv4 } from "uuid";
-import { Storage } from "aws-amplify";
-import { useUserContext } from "../contexts/UserContext";
-
-const user = {
-  id: "u1",
-  image:
-    "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
-  name: "Vadim Savin",
-};
 
 const CreatePostScreen = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const insets = useSafeAreaInsets();
-  const { user } = useUserContext();
+  const [user, setUser] = useState();
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await Auth.currentAuthenticatedUser();
+      const dbUser = await DataStore.query(User, userData.attributes.sub);
+      if (dbUser) {
+        setUser(dbUser);
+        console.log(dbUser);
+      } else {
+        navigation.navigate("Update profile");
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const onPost = async () => {
     const newPost = {
@@ -39,17 +45,14 @@ const CreatePostScreen = () => {
       numberOfLikes: 1020,
       numberOfShares: 1020,
       postUserId: user.id,
+      _version: 1,
     };
-
     if (image) {
       newPost.image = await uploadFile(image);
     }
-
-    const saved = await DataStore.save(new Post(newPost));
-
+    await DataStore.save(new Post(newPost));
     setDescription("");
     setImage("");
-
     navigation.goBack();
   };
 
@@ -88,8 +91,8 @@ const CreatePostScreen = () => {
       keyboardVerticalOffset={150}
     >
       <View style={styles.header}>
-        <Image source={{ uri: user.image }} style={styles.profileImage} />
-        <Text style={styles.name}>{user.name}</Text>
+        <Image source={{ uri: user?.image }} style={styles.profileImage} />
+        <Text style={styles.name}>{user?.name}</Text>
         <Entypo
           onPress={pickImage}
           name="images"

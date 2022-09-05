@@ -3,8 +3,8 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "sociala1f7e38e",
-    "userPoolName": "SocialMediaPrep",
+    "resourceNameTruncated": "fbtesteb222779",
+    "userPoolName": "FBTest",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -17,18 +17,23 @@
     "emailVerificationSubject": "Verification code: {####}",
     "emailVerificationMessage": "Verification code: {####}",
     "defaultPasswordPolicy": false,
-    "passwordPolicyMinLength": 6,
-    "passwordPolicyCharacters": [],
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [
+      "Requires Lowercase",
+      "Requires Numbers",
+      "Requires Symbols",
+      "Requires Uppercase"
+    ],
     "requiredAttributes": [],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "Sociala1f7e38e_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "FBTesteb222779_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "a1f7e38e",
-    "resourceName": "SocialMediaPrep",
+    "sharedId": "eb222779",
+    "resourceName": "FBTest",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
     "usernameAttributes": [

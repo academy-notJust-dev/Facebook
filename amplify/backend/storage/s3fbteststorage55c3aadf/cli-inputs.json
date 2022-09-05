@@ -1,7 +1,7 @@
 {
-  "resourceName": "s3prepstoragee2fb57f8",
-  "bucketName": "prep-storage-e2fb57f8",
-  "policyUUID": "a134b28f",
+  "resourceName": "s3fbteststorage55c3aadf",
+  "bucketName": "fbtest-storage-55c3aadf",
+  "policyUUID": "417ff6f1",
   "storageAccess": "authAndGuest",
   "guestAccess": [
     "READ"

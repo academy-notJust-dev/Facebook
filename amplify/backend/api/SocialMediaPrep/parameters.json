@@ -1,6 +1,0 @@
-{
-  "AppSyncApiName": "SocialMediaPrep",
-  "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2022-08-26T19:36:09.729Z"
-}

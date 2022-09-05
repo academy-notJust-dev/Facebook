@@ -1,4 +1,4 @@
-type Post @model @auth(rules: [{ allow: public }]) {
+type Post @model @auth(rules: [{allow: public}]) {
   id: ID!
   description: String
   image: String
@@ -7,7 +7,7 @@ type Post @model @auth(rules: [{ allow: public }]) {
   User: User @hasOne
 }
 
-type User @model @auth(rules: [{ allow: public }]) {
+type User @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   image: String
